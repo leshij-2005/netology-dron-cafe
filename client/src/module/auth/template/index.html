@@ -1,0 +1,20 @@
+<div class="auth__wrap" layout="row" layout-align="center center">
+  <form name="auth" novalidate ng-submit="submit(auth)">
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>User name</label>
+      <input ng-model="auth.username" required />
+      <div ng-messages="auth.username.$error">
+        <div ng-message="required">This is required.</div>
+      </div>
+    </md-input-container>
+    <md-input-container class="md-block" flex-gt-sm>
+      <label>E-mail</label>
+      <input type="email" ng-model="auth.email" required/>      
+      <div ng-messages="auth.email.$error" ng-pattern="/^.+@.+\..+$/">
+        <div ng-message="required">This is required.</div>
+        <div ng-message="patern">This is need e-mail.</div>
+      </div>
+    </md-input-container>
+    <md-button type="submit">Submit</md-button>
+  </form>
+</div>
