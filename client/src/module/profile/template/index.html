@@ -1,1 +1,18 @@
-<div>{{user.username}}</div>
+<md-content class="md-padding" layout-xs="column" layout="row">
+  <div flex-xs flex-gt-xs="50" layout="column">
+    <md-card>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{user.name}}</span>
+          <span class="md-subhead">{{user.email}}</span>
+          <span class="md-subhead">{{user.balance}} Credits</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button ng-click="topup()">Top up</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+  <div flex-xs flex-gt-xs="50" layout="column">
+  </div>
+</md-content>

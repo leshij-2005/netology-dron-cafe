@@ -8,20 +8,21 @@ angular
         $scope.state = 'processing';
 
         if ($scope.auth.$valid) {
-          Session.create({ 
+          /*Session.create({ 
             username: 'Alex', 
             email: 'test@test.ru', 
             balance: 100
-          });
+          });*/
 
-          /*AuthService
+          AuthService
             .login({
               name: data.username,
               email: data.email
             })
-            .then((user) => {
+            .then((response) => {
               $scope.state = 'ready';
-            });*/
+              Session.create(response.data);
+            });
         }
       }
     }
