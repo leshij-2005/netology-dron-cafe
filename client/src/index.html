@@ -10,7 +10,9 @@
   <body>
     <div class="wrapper" ng-controller="App">
       <auth ng-hide="authorized" class="auth"></auth>
-      <div ng-show="authorized" class="app"></div>
+      <div ng-show="authorized" class="customer">
+        <profile class="profile"></profile>
+      </div>
     </div>
 
 
@@ -26,5 +28,6 @@
 
     <script src="/src/app.js"></script>
     <script src="/src/module/auth/index.js"></script>
+    <script src="/src/module/profile/index.js"></script>
   </body>
 </html>

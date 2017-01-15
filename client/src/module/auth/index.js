@@ -41,18 +41,25 @@ angular
   .factory('Session', ($rootScope, AUTH_EVENTS) => {
 
     const scope = {
+      user: localStorage.user ? JSON.parse(localStorage.user) : null,
       authorized: !!localStorage.user,
+
       create(user) {
         this.user = user;
         this.authorized =  true;
 
-        localStorage.user = user;
+        localStorage.user = JSON.stringify(user);
 
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
       },
+
       destroy() {
         this.user = null;
         this.authorized = null;
+
+        localStorage.user = null;
+
+        $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
       }
     };
 
