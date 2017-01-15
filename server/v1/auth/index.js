@@ -40,7 +40,7 @@ const createUser = (data, cb) => {
 
   User.create(data, (error, result) => {
     if (error) {
-      console.error('Неудалось установить данные из коллекции. Ошибка:', error);
+      console.error('Неудалось установить данные в коллекцию. Ошибка:', error);
     }
     else {
       cb(result)

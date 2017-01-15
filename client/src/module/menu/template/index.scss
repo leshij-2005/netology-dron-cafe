@@ -1,0 +1,13 @@
+.menu
+{
+  width: 600px;
+  
+  &__item
+  {
+    &-img
+    {
+      background: no-repeat center center;
+      background-size: cover;
+    }
+  }
+}

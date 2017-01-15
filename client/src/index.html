@@ -11,7 +11,10 @@
     <div class="wrapper" ng-controller="App">
       <auth ng-hide="authorized" class="auth"></auth>
       <div ng-show="authorized" class="customer">
-        <profile class="profile"></profile>
+        <md-content class="md-padding" layout-xs="column" layout="row">
+          <profile flex-xs flex-gt-xs="50" layout="column" class="profile"></profile>
+          <orders flex-xs flex-gt-xs="50" layout="column" class="orders"></orders>
+        </md-content>
       </div>
     </div>
 
@@ -29,5 +32,7 @@
     <script src="/src/app.js"></script>
     <script src="/src/module/auth/index.js"></script>
     <script src="/src/module/profile/index.js"></script>
+    <script src="/src/module/orders/index.js"></script>
+    <script src="/src/module/menu/index.js"></script>
   </body>
 </html>

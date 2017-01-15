@@ -1,0 +1,29 @@
+<md-dialog aria-label="Menu" class="menu">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Menu</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">X</md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    <md-card ng-repeat="item in items" md-theme-watch>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">{{ item.title }}</span>
+          <span class="md-subhead">{{ item.price }} Credits</span>
+          <strong>Ingredients</strong>
+          <ul>
+            <li ng-repeat="ingred in item.ingredients track by $index">{{ingred}}</li>
+          </ul>
+        </md-card-title-text>
+        <md-card-title-media>
+          <div class="md-media-lg menu__item-img" style="background-image: url('{{item.image}}')"></div>
+        </md-card-title-media>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button ng-click="select(item)">Select</md-button>
+      </md-card-actions>
+    </md-card>
+  </md-dialog-content>
+</md-dialog>
