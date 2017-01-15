@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="/dist/app.css">
   </head>
   <body>
-    <div class="wrapper">
-      <auth class="auth"></auth>
+    <div class="wrapper" ng-controller="App">
+      <auth ng-hide="authorized" class="auth"></auth>
+      <div ng-show="authorized" class="app"></div>
     </div>
 
 

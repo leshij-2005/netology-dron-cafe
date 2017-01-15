@@ -3,26 +3,30 @@ angular
   .component('auth', {
     templateUrl: 'src/module/auth/template/index.html',
     transclude: true,
-    controller: ($scope, authService) => {
+    controller: ($scope, AuthService, Session) => {
       $scope.submit = (data) => {
         $scope.state = 'processing';
 
         if ($scope.auth.$valid) {
-          debugger;
-
-          authService
+          Session.create({ 
+            username: 'Alex', 
+            email: 'test@test.ru', 
+            balance: 100
+          });
+          
+          /*AuthService
             .login({
-              name: data.name,
+              name: data.username,
               email: data.email
             })
             .then((user) => {
               $scope.state = 'ready';
-            });
+            });*/
         }
       }
     }
   })
-  .factory('authService', ($http) => {
+  .factory('AuthService', ($http) => {
       return {
         login: (data) => {
           return $http({
@@ -33,4 +37,26 @@ angular
         }
       }
     }
-  );
+  )
+  .factory('Session', ($rootScope, AUTH_EVENTS) => {
+
+    const scope = {
+      authorized: false,
+      create(user) {
+        this.user = user;
+        this.authorized =  true;
+
+        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+      },
+      destroy() {
+        this.user = null;
+        this.authorized = null;
+      }
+    };
+
+    return scope;
+  })
+  .constant('AUTH_EVENTS', {
+    loginSuccess: 'auth-login-success',
+    logoutSuccess: 'auth-logout-success'
+  });

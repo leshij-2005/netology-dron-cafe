@@ -1,5 +1,5 @@
 <div class="auth__wrap" layout="row" layout-align="center center">
-  <form name="auth" novalidate ng-submit="submit(auth)">
+  <form name="auth" novalidate class="{{state}}" ng-submit="submit(auth)">
     <md-input-container class="md-block" flex-gt-sm>
       <label>User name</label>
       <input ng-model="auth.username" required />
