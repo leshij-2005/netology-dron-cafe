@@ -13,7 +13,7 @@ angular
             email: 'test@test.ru', 
             balance: 100
           });
-          
+
           /*AuthService
             .login({
               name: data.username,
@@ -41,10 +41,12 @@ angular
   .factory('Session', ($rootScope, AUTH_EVENTS) => {
 
     const scope = {
-      authorized: false,
+      authorized: !!localStorage.user,
       create(user) {
         this.user = user;
         this.authorized =  true;
+
+        localStorage.user = user;
 
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
       },
