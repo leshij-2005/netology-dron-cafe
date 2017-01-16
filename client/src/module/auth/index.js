@@ -47,10 +47,7 @@ cafeApp
       },
 
       getUser() {
-        return $http({
-          method: 'GET',
-          url: 'http://localhost:3000/v1/profile/' + this.user._id
-        });
+        return $http.get(`http://localhost:3000/v1/profile/${this.user._id}`);
       },
 
       destroy() {

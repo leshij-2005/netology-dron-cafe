@@ -28,7 +28,7 @@ cafeApp
   })
   .factory('OrdersService', ($http, Session) => {
     return {
-      get: () => $http.get('http://localhost:3000/v1/orders/' +  Session.user._id),
+      get: () => $http.get(`http://localhost:3000/v1/orders/${Session.user._id}`),
       create: (dish) => {
         return $http({
           method: 'POST',
