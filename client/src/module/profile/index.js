@@ -1,8 +1,6 @@
-angular
-  .module('CafeApp')
+cafeApp
   .component('profile', {
     templateUrl: 'src/module/profile/template/index.html',
-    transclude: true,
     controller: ($scope, Session, ProfileService, AUTH_EVENTS, PROFILE_EVENTS) => {
       const getUser = () => {
         $scope.user = Session.user;

@@ -1,8 +1,6 @@
-angular
-  .module('CafeApp')
+cafeApp
   .component('orders', {
     templateUrl: 'src/module/orders/template/index.html',
-    transclude: true,
     controller: ($scope, $mdDialog, OrdersService, ORDERS_EVENTS) => {
       const getItems = () => {
         OrdersService

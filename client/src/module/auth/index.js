@@ -1,19 +1,11 @@
-angular
-  .module('CafeApp')
+cafeApp
   .component('auth', {
     templateUrl: 'src/module/auth/template/index.html',
-    transclude: true,
     controller: ($scope, AuthService, Session) => {
       $scope.submit = (data) => {
         $scope.state = 'processing';
 
         if ($scope.auth.$valid) {
-          /*Session.create({ 
-            username: 'Alex', 
-            email: 'test@test.ru', 
-            balance: 100
-          });*/
-
           AuthService
             .login({
               name: data.username,
@@ -39,7 +31,7 @@ angular
       }
     }
   )
-  .factory('Session', ($rootScope, AUTH_EVENTS) => {
+  .factory('Session', ($rootScope, $http, AUTH_EVENTS) => {
 
     const scope = {
       user: localStorage.user ? JSON.parse(localStorage.user) : null,
@@ -54,6 +46,13 @@ angular
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
       },
 
+      getUser() {
+        return $http({
+          method: 'GET',
+          url: 'http://localhost:3000/v1/profile/' + this.user._id
+        });
+      },
+
       destroy() {
         this.user = null;
         this.authorized = null;
@@ -63,6 +62,14 @@ angular
         $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
       }
     };
+
+    if (scope.user) {
+      scope
+        .getUser()
+        .then((response) => {
+          scope.create(response.data)
+        })
+    }
 
     return scope;
   })

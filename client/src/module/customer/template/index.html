@@ -1,0 +1,9 @@
+<div class="wrapper" ng-controller="Customer">
+  <auth ng-hide="authorized" class="auth"></auth>
+  <div ng-show="authorized" class="customer">
+    <md-content class="md-padding" layout-xs="column" layout="row">
+      <profile flex-xs flex-gt-xs="50" layout="column" class="profile"></profile>
+      <orders flex-xs flex-gt-xs="50" layout="column" class="orders"></orders>
+    </md-content>
+  </div>
+</div>

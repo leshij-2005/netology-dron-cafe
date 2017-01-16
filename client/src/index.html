@@ -8,16 +8,7 @@
     <link rel="stylesheet" href="/dist/app.css">
   </head>
   <body>
-    <div class="wrapper" ng-controller="App">
-      <auth ng-hide="authorized" class="auth"></auth>
-      <div ng-show="authorized" class="customer">
-        <md-content class="md-padding" layout-xs="column" layout="row">
-          <profile flex-xs flex-gt-xs="50" layout="column" class="profile"></profile>
-          <orders flex-xs flex-gt-xs="50" layout="column" class="orders"></orders>
-        </md-content>
-      </div>
-    </div>
-
+    <ng-view></ng-view>
 
     <script src="/node_modules/angular/angular.js"></script>
     <script src="/node_modules/angular-route/angular-route.js"></script>
@@ -34,5 +25,7 @@
     <script src="/src/module/profile/index.js"></script>
     <script src="/src/module/orders/index.js"></script>
     <script src="/src/module/menu/index.js"></script>
+    <script src="/src/module/customer/index.js"></script>
+    <script src="/src/module/kitchen/index.js"></script>
   </body>
 </html>
