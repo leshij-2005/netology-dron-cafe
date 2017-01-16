@@ -1,3 +1,40 @@
 <div class="wrapper">
-  <div>Kitchen</div>
+  <md-content class="md-padding" layout-xs="column" layout="row">
+    <md-card flex-xs flex-gt-xs="50" layout="column">
+      <md-list flex>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Created orders</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-list-item class="md-3-line" ng-repeat="item in createdOrders" ng-click="null">
+          <img ng-src="{{item.dish.image}}" class="md-avatar" />
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ item.dish.title }}</h3>
+            <h4>{{ item.state }}</h4>
+            <p>{{ item.dish.price }} Credits</p>
+          </div>
+          <md-button class="md-secondary" ng-click="toProcess(item)">To process</md-button>
+        </md-list-item>
+      </md-list>
+    </md-card>
+    <md-card flex-xs flex-gt-xs="50" layout="column">
+      <md-list flex>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Orders in process</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-list-item class="md-3-line" ng-repeat="item in processOrders" ng-click="null">
+          <img ng-src="{{item.dish.image}}" class="md-avatar" />
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ item.dish.title }}</h3>
+            <h4>{{ item.state }}</h4>
+            <p>{{ item.dish.price }} Credits</p>
+          </div>
+          <md-button class="md-secondary" ng-click="delivery(item)">Ready</md-button>
+        </md-list-item>
+      </md-list>
+    </md-card>
+  </md-content>
 </div>
