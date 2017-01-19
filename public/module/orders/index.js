@@ -1,6 +1,6 @@
 cafeApp
   .component('orders', {
-    templateUrl: 'src/module/orders/template/index.html',
+    templateUrl: 'public/module/orders/template/index.html',
     controller: function($scope, $mdDialog, OrdersService, ORDERS_EVENTS, AUTH_EVENTS, socket, Session) {
       $scope.items = [];
 
@@ -15,7 +15,7 @@ cafeApp
       $scope.add = function(ev) {
         $mdDialog.show({
           controller: MenuController,
-          templateUrl: 'src/module/menu/template/index.html',
+          templateUrl: 'public/module/menu/template/index.html',
           parent: angular.element(document.body),
           targetEvent: ev,
           clickOutsideToClose: true

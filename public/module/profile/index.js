@@ -1,6 +1,6 @@
 cafeApp
   .component('profile', {
-    templateUrl: 'src/module/profile/template/index.html',
+    templateUrl: 'public/module/profile/template/index.html',
     controller: function($scope, Session, ProfileService, AUTH_EVENTS, socket) {
       var getUser = function() {
         $scope.user = Session.user;

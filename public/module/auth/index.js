@@ -1,6 +1,6 @@
 cafeApp
   .component('auth', {
-    templateUrl: 'src/module/auth/template/index.html',
+    templateUrl: 'public/module/auth/template/index.html',
     controller: function($scope, AuthService, Session) {
       $scope.submit = function(data) {
         $scope.state = 'processing';

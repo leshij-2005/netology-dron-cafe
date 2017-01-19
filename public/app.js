@@ -4,11 +4,11 @@ cafeApp
   .config(['$routeProvider', function($routeProvider) {
       $routeProvider.
         when('/', {
-          templateUrl: 'src/module/customer/template/index.html',
+          templateUrl: 'public/module/customer/template/index.html',
           controller: 'Customer'
         }).
         when('/kitchen', {
-          templateUrl: 'src/module/kitchen/template/index.html',
+          templateUrl: 'public/module/kitchen/template/index.html',
           controller: 'Kitchen'
         }).
         otherwise({

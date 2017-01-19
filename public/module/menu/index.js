@@ -4,7 +4,7 @@ var MenuController = function($scope, $rootScope, $http, $mdDialog, Session, soc
   }
 
   $http
-    .get('./src/module/menu/data.json')
+    .get('./public/module/menu/data.json')
     .then(function(response) {
       $scope.items = response.data;
     });
