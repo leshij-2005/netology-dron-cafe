@@ -1,7 +1,6 @@
 const cafeApp = angular.module('CafeApp', ['ngRoute', 'ngMaterial', 'btford.socket-io']);
 
-angular
-  .module('CafeApp')
+cafeApp
   .config(['$routeProvider', ($routeProvider) => {
       $routeProvider.
         when('/', {
@@ -16,4 +15,11 @@ angular
           redirectTo: '/'
         });
     }
-  ]);
+  ])
+  .factory('socket', function(socketFactory) {
+    socket = socketFactory({
+      ioSocket: io.connect('http://localhost:3000/')
+    });
+
+    return socket;
+  });

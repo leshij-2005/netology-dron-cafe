@@ -9,11 +9,4 @@ cafeApp
     $scope.$on(AUTH_EVENTS.getProfileSuccess, isAuthorized);
 
     isAuthorized();
-  })
-  .factory('socket', function(socketFactory) {
-    socket = socketFactory({
-      ioSocket: io.connect('http://localhost:3000/')
-    });
-
-    return socket;
   });

@@ -36,7 +36,7 @@ gulp.task('css:build', function () {
     .pipe(prefixer())
     .pipe(postcss(processors))
     .pipe(cssmin())
-    .pipe(gulp.dest('./dist/'))
+    .pipe(gulp.dest('./src/template/'))
 });
 
 //
