@@ -22,7 +22,8 @@
         </md-card-title-media>
       </md-card-title>
       <md-card-actions layout="row" layout-align="end center">
-        <md-button ng-click="select(item)">Select</md-button>
+        <md-button ng-show="balance >= item.price" ng-click="select(item)">Select</md-button>
+        <md-button ng-show="balance < item.price" ng-click="topup()">Topup</md-button>
       </md-card-actions>
     </md-card>
   </md-dialog-content>

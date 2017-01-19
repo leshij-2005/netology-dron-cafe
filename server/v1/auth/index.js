@@ -33,6 +33,17 @@ schema.statics.findById = function(id, cb) {
   });
 }
 
+schema.statics.updateBalance = function(id, balance, cb) {
+  return this.update({ _id: id }, { $inc: { balance: balance } }, (error, result) => {
+    if (error) {
+      console.error('Неудалось обновить данные в коллекции. Ошибка:', error);
+    }
+    else {
+      cb(result);
+    }
+  });
+}
+
 const User = mongoose.model('User', schema);
 
 const createUser = (data, cb) => {

@@ -27,6 +27,10 @@ cafeApp
         getItems();
       });
 
+      socket.on('order-removed', () => {
+        getItems();
+      });
+
       getItems();
     }
   })
@@ -47,11 +51,4 @@ cafeApp
   })
   .constant('ORDERS_EVENTS', {
     orderCreated: 'order-created'
-  })
-  .factory('socket', function(socketFactory) {
-    socket = socketFactory({
-      ioSocket: io.connect('http://localhost:3000/')
-    });
-
-    return socket;
   });

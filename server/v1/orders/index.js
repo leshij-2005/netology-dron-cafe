@@ -11,6 +11,17 @@ const schema = new Schema({
   user_id: 'ObjectId'
 });
 
+schema.statics.findById = function(id, cb) {
+  return this.find({ _id: id }).exec((error, result) => {
+    if (error) {
+      console.error('Неудалось получить данные из коллекции. Ошибка:', error);
+    }
+    else {
+      cb(result[0]);
+    }
+  });
+}
+
 const Order = mongoose.model('Order', schema);
 const User = mongoose.model('User');
 
@@ -35,10 +46,8 @@ app.post('/', ({ body, socket }, response) => {
 
       const price = body.dish.price;
 
-      User.update({ _id: body.user_id }, { $inc: { balance: -price } }, (error, result) => {
-        if (error) {
-          console.error('Неудалось имзенить данные в коллекции. Ошибка:', error);
-        }
+      User.updateBalance(body.user_id, -price, (error, result) => {
+        socket.sockets.emit('update-balance', result);
       });
 
       socket.sockets.emit('new-order', result);

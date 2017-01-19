@@ -19,6 +19,7 @@
     "express": "^4.14.0",
     "mongodb": "^2.2.11",
     "mongoose": "^4.7.2",
+    "netology-fake-drone-api": "^1.0.1",
     "querystring": "^0.2.0",
     "socket.io": "^1.5.1"
   }

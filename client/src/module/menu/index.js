@@ -1,4 +1,8 @@
-const MenuController = ($scope, $rootScope, $http, $mdDialog, OrdersService, ORDERS_EVENTS) => {
+const MenuController = ($scope, $rootScope, $http, $mdDialog, Session, socket, OrdersService, ProfileService, ORDERS_EVENTS) => {
+  const getBalance = () => {
+    $scope.balance = Session.user.balance;
+  }
+
   $http
     .get('./src/module/menu/data.json')
     .then((response) => {
@@ -18,4 +22,16 @@ const MenuController = ($scope, $rootScope, $http, $mdDialog, OrdersService, ORD
         $rootScope.$broadcast(ORDERS_EVENTS.orderCreated);
       });
   }
+
+  $scope.topup = () => {
+    $mdDialog.cancel();
+
+    ProfileService.topup();
+  }
+
+  socket.on('update-balance', () => {
+    getBalance();
+  });
+
+  getBalance();
 }

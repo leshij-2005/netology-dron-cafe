@@ -7,16 +7,13 @@ const app = express();
 
 const User = mongoose.model('User');
 
-app.post('/', ({ body }, response) => {
-  User.update({ _id: body.id }, { $inc: { balance: 100 } }, (error, result) => {
-    if (error) {
-      console.error('Неудалось изменить данные в коллекции. Ошибка:', error);
-    }
-    else {
-      User.findById(body.id, (result) => {
-        response.json(result);
-      });
-    }
+app.post('/', ({ body, socket }, response) => {
+  User.updateBalance(body.id, 100, (error, result) => {
+    socket.sockets.emit('update-balance', result);
+    
+    User.findById(body.id, (result) => {
+      response.json(result);
+    });
   });
 });
 

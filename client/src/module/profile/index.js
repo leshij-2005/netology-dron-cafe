@@ -1,22 +1,29 @@
 cafeApp
   .component('profile', {
     templateUrl: 'src/module/profile/template/index.html',
-    controller: ($scope, Session, ProfileService, AUTH_EVENTS, PROFILE_EVENTS) => {
+    controller: ($scope, Session, ProfileService, AUTH_EVENTS, socket) => {
       const getUser = () => {
         $scope.user = Session.user;
       };
 
       $scope.$on(AUTH_EVENTS.loginSuccess, getUser);
-      $scope.$on(PROFILE_EVENTS.balanceChanged, getUser);
 
       $scope.topup = () => {
         ProfileService.topup();
       }
 
+      socket.on('update-balance', () => {
+        Session.getUser().then((response) => {
+          Session.user = response.data;
+          
+          getUser();
+        });
+      })
+
       getUser();
     }
   })
-  .factory('ProfileService', ($http, $rootScope, Session, PROFILE_EVENTS) => {
+  .factory('ProfileService', ($http, $rootScope, Session) => {
     return {
       topup: (data) => {
         return $http({
@@ -26,16 +33,6 @@ cafeApp
             id: Session.user._id
           }
         })
-        .then((response) => {
-          Session.user = response.data;
-          
-          $rootScope.$broadcast(PROFILE_EVENTS.balanceChanged);
-        });
       }
-    }
-  })
-  .constant('PROFILE_EVENTS', () => {
-    return {
-      balanceChanged: 'balance-changed'
     }
   })
