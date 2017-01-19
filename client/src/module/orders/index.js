@@ -23,9 +23,11 @@ cafeApp
       $scope.$on(ORDERS_EVENTS.orderCreated, getItems);
       $scope.$on(AUTH_EVENTS.loginSuccess, getItems);
 
-      socket.on('ordersChanged', () => {
+      socket.on('order-changed', () => {
         getItems();
       });
+
+      getItems();
     }
   })
   .factory('OrdersService', ($http, Session) => {
@@ -52,4 +54,4 @@ cafeApp
     });
 
     return socket;
-});;
+  });

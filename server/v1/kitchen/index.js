@@ -19,24 +19,28 @@ app.get('/orders/:state', ({ params } , response) => {
   });
 });
 
-app.post('/process/:id', ({ params } , response) => {
+app.post('/process/:id', ({ params, socket } , response) => {
   Order.update({ _id: params.id }, { $set: { state: 'process' } }, (error, result) => {
     if (error) {
       console.error('Неудалось получить данные из коллекции. Ошибка:', error);
     }
     else {
       response.json(result);
+
+      socket.sockets.emit('order-changed', result);
     }
   });
 });
 
-app.post('/delivery/:id', ({ params } , response) => {
+app.post('/delivery/:id', ({ params, socket } , response) => {
   Order.update({ _id: params.id }, { $set: { state: 'delivered' } }, (error, result) => {
     if (error) {
       console.error('Неудалось получить данные из коллекции. Ошибка:', error);
     }
     else {
       response.json(result);
+
+      socket.sockets.emit('order-changed', result);
     }
   });
 });

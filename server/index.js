@@ -5,7 +5,7 @@ const socketIO = require('socket.io');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIO(server);
+const socket = socketIO(server);
 
 const PORT = process.env.PORT || 3000;
 
@@ -39,8 +39,13 @@ app.use((err, req, res, next) => {
     });
 });
 
+app.use((req, res, next) => {
+  req.socket = socket;
+  next();
+});
+
 app.use('/v1', require('./v1'));
 
-io.on('connection', socket => {
+socket.on('connection', socket => {
   console.log('connected');
 });

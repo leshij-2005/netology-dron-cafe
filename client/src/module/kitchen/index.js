@@ -1,6 +1,6 @@
 angular
   .module('CafeApp')
-  .controller('Kitchen', function($scope, KitchenService) {
+  .controller('Kitchen', function($scope, KitchenService, socket) {
 
     const getCreatedOrders = () => {
       KitchenService
@@ -39,6 +39,8 @@ angular
         })
     }
 
+    socket.on('new-order', getOrders);
+
     getOrders();
   })
   .factory('KitchenService', ($http) => {
@@ -53,4 +55,11 @@ angular
         return $http.post(`http://localhost:3000/v1/kitchen/delivery/${id}`)
       }
     }
-  });
+  })
+  .factory('socket', function(socketFactory) {
+    socket = socketFactory({
+      ioSocket: io.connect('http://localhost:3000/')
+    });
+
+    return socket;
+  });;

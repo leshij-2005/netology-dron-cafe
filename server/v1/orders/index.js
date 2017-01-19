@@ -25,13 +25,13 @@ app.get('/:id', ({ params }, response) => {
   });
 });
 
-app.post('/', ({ body }, response) => {
+app.post('/', ({ body, socket }, response) => {
   Order.create(body, (error, result) => {
     if (error) {
       console.error('Неудалось установить данные в коллекцию. Ошибка:', error);
     }
     else {
-      response.json(result[0]);
+      response.json(result);
 
       const price = body.dish.price;
 
@@ -40,6 +40,8 @@ app.post('/', ({ body }, response) => {
           console.error('Неудалось имзенить данные в коллекции. Ошибка:', error);
         }
       });
+
+      socket.sockets.emit('new-order', result);
     }
   });
 });
