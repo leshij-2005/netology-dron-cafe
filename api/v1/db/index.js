@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const URL = 'mongodb://localhost:27017/netology-dron-cafe';
+const URL = 'mongodb://heroku_5545vsbh:19ershov91@ds117189.mlab.com:17189/heroku_5545vsbh';
 
 mongoose.connect(URL);
 
