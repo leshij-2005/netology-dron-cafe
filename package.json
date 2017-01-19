@@ -1,0 +1,49 @@
+{
+  "name": "netology-dron-cafe",
+  "version": "1.0.0",
+  "description": "Graduate work by Netology",
+  "main": "index.js",
+  "scripts": {
+    "server": "node index.js",
+    "dev": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leshij-2005/netology-dron-cafe.git"
+  },
+  "author": "Alexey Ershov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leshij-2005/netology-dron-cafe/issues"
+  },
+  "homepage": "https://github.com/leshij-2005/netology-dron-cafe#readme",
+  "engines": {
+    "node": "5.9.1"
+  },
+  "dependencies": {
+    "angular": "1.5.8",
+    "angular-route": "1.5.8",
+    "angular-socket-io": "^0.7.0",
+    "angular-aria": "1.5.8",
+    "angular-animate": "1.5.8",
+    "angular-material": "^1.0.0",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongodb": "^2.2.11",
+    "mongoose": "^4.7.2",
+    "netology-fake-drone-api": "^1.0.1",
+    "querystring": "^0.2.0",
+    "socket.io": "^1.5.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-server-livereload": "^1.8.4",
+    "gulp-postcss": "^6.2.0",
+    "gulp-sass": "^2.1.1",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.5",
+    "postcss-pxtorem": "^3.3.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean-css": "^2.0.13"
+  }
+}
