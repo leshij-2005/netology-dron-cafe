@@ -1,16 +1,15 @@
 const express = require('express');
 const mongoose = require('../db');
 
-const { Schema } = mongoose;
-
 const app = express();
+
+const { Schema } = mongoose;
 
 const schema = new Schema({
   dish: Object,
   state: { type: String, default: 'created' },
   user_id: 'ObjectId'
 });
-
 
 const Order = mongoose.model('Order', schema);
 const User = mongoose.model('User');

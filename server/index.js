@@ -1,13 +1,25 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const PORT = process.env.PORT || 3000; 
+const http = require('http');
+const socketIO = require('socket.io');
 
 const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
+
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, () => {
+  console.log(`Server listening at port ${PORT}`);
+});
+
+app.use(express.static(__dirname));
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:8000');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'OPTIONS,GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Credentials', true);
 
   if ('OPTIONS' == req.method) {
     res.sendStatus(200);
@@ -27,8 +39,8 @@ app.use((err, req, res, next) => {
     });
 });
 
-app.listen(PORT).on('listening', () => {
-  console.log(`Start HTTP on port ${PORT}`);
-});
-
 app.use('/v1', require('./v1'));
+
+io.on('connection', socket => {
+  console.log('connected');
+});

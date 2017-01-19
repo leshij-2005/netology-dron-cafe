@@ -1,4 +1,4 @@
-const cafeApp = angular.module('CafeApp', ['ngRoute', 'ngMaterial']);
+const cafeApp = angular.module('CafeApp', ['ngRoute', 'ngMaterial', 'btford.socket-io']);
 
 angular
   .module('CafeApp')

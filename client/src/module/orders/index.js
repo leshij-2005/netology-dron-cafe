@@ -1,7 +1,7 @@
 cafeApp
   .component('orders', {
     templateUrl: 'src/module/orders/template/index.html',
-    controller: ($scope, $mdDialog, OrdersService, ORDERS_EVENTS) => {
+    controller: ($scope, $mdDialog, OrdersService, ORDERS_EVENTS, AUTH_EVENTS, socket, Session) => {
       const getItems = () => {
         OrdersService
           .get()
@@ -16,14 +16,16 @@ cafeApp
           templateUrl: 'src/module/menu/template/index.html',
           parent: angular.element(document.body),
           targetEvent: ev,
-          clickOutsideToClose: true,
-          fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+          clickOutsideToClose: true
         })
       }
 
       $scope.$on(ORDERS_EVENTS.orderCreated, getItems);
+      $scope.$on(AUTH_EVENTS.loginSuccess, getItems);
 
-      getItems();
+      socket.on('ordersChanged', () => {
+        getItems();
+      });
     }
   })
   .factory('OrdersService', ($http, Session) => {
@@ -43,4 +45,11 @@ cafeApp
   })
   .constant('ORDERS_EVENTS', {
     orderCreated: 'order-created'
-  });
+  })
+  .factory('socket', function(socketFactory) {
+    socket = socketFactory({
+      ioSocket: io.connect('http://localhost:3000/')
+    });
+
+    return socket;
+});;
