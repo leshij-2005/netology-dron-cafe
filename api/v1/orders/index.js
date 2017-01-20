@@ -26,6 +26,16 @@ const Order = mongoose.model('Order', schema);
 const User = mongoose.model('User');
 
 app.get('/:id', ({ params }, response) => {
+  if (!params || !params.id) {
+    response
+      .sendStatus(400)
+      .render('error', { 
+        error: 'Not params'
+      });
+
+    return;
+  }
+
   Order.find({ user_id: params.id }).exec((error, result) => {
     if (error) {
       console.error('Неудалось получить данные из коллекции. Ошибка:', error);
@@ -37,6 +47,16 @@ app.get('/:id', ({ params }, response) => {
 });
 
 app.post('/', ({ body, socket }, response) => {
+  if (!body) {
+    response
+      .sendStatus(400)
+      .render('error', { 
+        error: 'Not params'
+      });
+
+    return;
+  }
+
   Order.create(body, (error, result) => {
     if (error) {
       console.error('Неудалось установить данные в коллекцию. Ошибка:', error);

@@ -30,6 +30,16 @@ const remove = (id, cb) => {
 } 
 
 app.get('/orders/:state', ({ params } , response) => {
+  if (!params || !params.state) {
+    response
+      .sendStatus(400)
+      .render('error', { 
+        error: 'Not params'
+      });
+
+    return;
+  }
+
   Order.find({ state: params.state }).exec((error, result) => {
     if (error) {
       console.error('Неудалось получить данные из коллекции. Ошибка:', error);
@@ -41,6 +51,16 @@ app.get('/orders/:state', ({ params } , response) => {
 });
 
 app.post('/process/:id', ({ params, socket } , response) => {
+  if (!params || !params.id) {
+    response
+      .sendStatus(400)
+      .render('error', { 
+        error: 'Not params'
+      });
+
+    return;
+  }
+
   updateState(params.id, 'process', (result) => {
     response.json(result);
 
@@ -49,6 +69,16 @@ app.post('/process/:id', ({ params, socket } , response) => {
 });
 
 app.post('/delivery/:id', ({ params, socket } , response) => {
+  if (!params || !params.id) {
+    response
+      .sendStatus(400)
+      .render('error', { 
+        error: 'Not params'
+      });
+
+    return;
+  }
+  
   updateState(params.id, 'delivered', (result) => {
     response.json(result);
 

@@ -60,6 +60,16 @@ const createUser = (data, cb) => {
 }
 
 app.post('/', ({ body }, response) => {
+  if (!body || !body.email) {
+    response
+      .sendStatus(400)
+      .json({ 
+        error: 'Not params'
+      });
+
+    return;
+  }
+
   User.findByEmail(body.email, (result) => {
     if (result) {
       response.json(result);

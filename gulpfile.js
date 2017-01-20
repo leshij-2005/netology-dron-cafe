@@ -54,7 +54,7 @@ gulp.task('build', [
 gulp.task('webserver', function() {
  gulp.src('')
    .pipe(server({
-     livereload:       true
+     livereload: true
    }));
 });
 
