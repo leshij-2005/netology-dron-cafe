@@ -6,7 +6,9 @@
   "scripts": {
     "start": "./node_modules/.bin/babel-node index.js",
     "dev": "cross-env NODE_ENV=development node index.js",
-    "test": "cross-env NODE_ENV=development mocha"
+    "test": "cross-env NODE_ENV=development mocha",
+    "webdriver-manager": "webdriver-manager update && webdriver-manager start",
+    "e2e-test": "protractor e2e/conf.js"
   },
   "repository": {
     "type": "git",
@@ -51,6 +53,9 @@
     "gulp-watch": "^4.3.5",
     "mocha": "^3.2.0",
     "postcss-pxtorem": "^3.3.1",
-    "supertest": "^2.0.1"
+    "protractor": "^5.0.0",
+    "protractor-jasmine2-html-reporter": "0.0.7",
+    "supertest": "^2.0.1",
+    "webdriver-manager": "^11.1.1"
   }
 }
