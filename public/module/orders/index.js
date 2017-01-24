@@ -32,10 +32,6 @@ cafeApp
       socket.on('order-removed', function() {
         getItems();
       });
-
-      if (Session.authorized) {
-        getItems();
-      }
     }
   })
   .factory('OrdersService', function($http, Session) {

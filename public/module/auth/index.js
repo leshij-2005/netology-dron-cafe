@@ -64,7 +64,7 @@ cafeApp
       scope
         .getUser()
         .then(function(response) {
-          scope.user = response.data;
+          scope.create(response.data);
         })
     }
 
