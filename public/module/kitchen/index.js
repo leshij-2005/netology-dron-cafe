@@ -27,7 +27,7 @@ cafeApp
         .toProcess(order._id)
         .then(function() {
           getOrders();
-        })
+        });
     }
 
     $scope.delivery = function(order) {
@@ -35,7 +35,7 @@ cafeApp
         .delivery(order._id)
         .then(function() {
           getOrders();
-        })
+        });
     }
 
     socket.on('new-order', getOrders);

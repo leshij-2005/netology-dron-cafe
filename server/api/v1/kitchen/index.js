@@ -1,6 +1,7 @@
 const express = require('express');
 const drone = require('netology-fake-drone-api');
 const mongoose = require('../db');
+const io = require('../../../module/socket');
 
 const app = express();
 
@@ -50,7 +51,7 @@ app.get('/orders/:state', ({ params } , response) => {
   });
 });
 
-app.post('/process/:id', ({ params, socket } , response) => {
+app.post('/process/:id', ({ params } , response) => {
   if (!params || !params.id) {
     response
       .sendStatus(400)
@@ -64,11 +65,11 @@ app.post('/process/:id', ({ params, socket } , response) => {
   updateState(params.id, 'process', (result) => {
     response.json(result);
 
-    socket.sockets.emit('order-changed', result);
+    io.emitSocketByUser(result.user_id, 'order-changed', result);
   });
 });
 
-app.post('/delivery/:id', ({ params, socket } , response) => {
+app.post('/delivery/:id', ({ params } , response) => {
   if (!params || !params.id) {
     response
       .sendStatus(400)
@@ -86,28 +87,28 @@ app.post('/delivery/:id', ({ params, socket } , response) => {
       .deliver()
       .then(() => {
         updateState(params.id, 'submitted', (result) => {
-          socket.sockets.emit('order-changed', result);
+          io.emitSocketByUser(result.user_id, 'order-changed', result);
 
           remove(params.id, () => {
-            socket.sockets.emit('order-removed');
+            io.emitSocketByUser(result.user_id, 'order-removed');
           });
         });
       })
       .catch(() => {
         updateState(params.id, 'have_difficulties', (result) => {
-          socket.sockets.emit('order-changed', result);
+          io.emitSocketByUser(result.user_id,'order-changed', result);
 
           User.updateBalance(result.user_id, result.dish.price, (error, result) => {
-            socket.sockets.emit('update-balance', result);
+            io.emitSocketByUser(result.user_id, 'update-balance', result);
           });
 
           remove(params.id, () => {
-            socket.sockets.emit('order-removed');
+            io.emitSocketByUser(result.user_id, 'order-removed');
           });
         });
       });
 
-    socket.sockets.emit('order-changed', result);
+    io.emitSocketByUser(result.user_id, 'order-changed', result);
   });
 });
 

@@ -31,7 +31,7 @@ cafeApp
       }
     }
   )
-  .factory('Session', function($rootScope, $http, AUTH_EVENTS) {
+  .factory('Session', function($rootScope, $http, AUTH_EVENTS, socket) {
 
     var scope = {
       user: localStorage.user ? JSON.parse(localStorage.user) : null,
@@ -44,6 +44,8 @@ cafeApp
         localStorage.user = JSON.stringify(user);
 
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+        
+        this.sendToSocket();
       },
 
       getUser: function() {
@@ -57,6 +59,12 @@ cafeApp
         localStorage.user = null;
 
         $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+      },
+
+      sendToSocket: function() {
+        if (this.authorized) {
+          socket.emit('signin-user', this.user);
+        }
       }
     };
 
@@ -65,7 +73,7 @@ cafeApp
         .getUser()
         .then(function(response) {
           scope.create(response.data);
-        })
+        });
     }
 
     return scope;

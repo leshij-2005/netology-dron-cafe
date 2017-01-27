@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('../db');
+const io = require('../../../module/socket');
 
 const app = express();
 
@@ -46,7 +47,7 @@ app.get('/:id', ({ params }, response) => {
   });
 });
 
-app.post('/', ({ body, socket }, response) => {
+app.post('/', ({ body }, response) => {
   if (!body) {
     response
       .sendStatus(400)
@@ -67,10 +68,11 @@ app.post('/', ({ body, socket }, response) => {
       const price = body.dish.price;
 
       User.updateBalance(body.user_id, -price, (error, result) => {
-        socket.sockets.emit('update-balance', result);
+        io.emitSocketByUser(body.user_id, 'update-balance', result);
       });
 
-      socket.sockets.emit('new-order', result);
+      io.sockets.emit('new-order', result);
+      io.emitSocketByUser(body.user_id, 'new-order', result);
     }
   });
 });

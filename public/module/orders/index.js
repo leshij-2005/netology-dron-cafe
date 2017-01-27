@@ -32,6 +32,10 @@ cafeApp
       socket.on('order-removed', function() {
         getItems();
       });
+
+      socket.on('new-order', function() {
+        getItems();
+      });
     }
   })
   .factory('OrdersService', function($http, Session) {

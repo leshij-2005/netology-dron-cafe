@@ -4,8 +4,8 @@
   "description": "Graduate work by Netology",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/babel-node index.js",
-    "dev": "cross-env NODE_ENV=development node index.js",
+    "start": "./node_modules/.bin/babel-node server/index.js",
+    "dev": "cross-env NODE_ENV=development node server/index.js",
     "test": "cross-env NODE_ENV=development mocha",
     "webdriver-manager": "webdriver-manager update && webdriver-manager start",
     "e2e-test": "protractor e2e/conf.js"

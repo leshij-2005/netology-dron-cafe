@@ -11,14 +11,6 @@ var cssmin = require('gulp-clean-css');
 var sass = require('gulp-sass');
 
 //
-// clean
-//
-
-gulp.task('clean', function () {
-  del(path.outDir);
-});
-
-//
 // css build
 //
  
